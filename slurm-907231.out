@@ -1,0 +1,193 @@
+Running SLURM prolog script on ecsai02
+===============================================================================
+Job started on Mon May  4 20:17:15 BST 2026
+Job ID          : 907231
+Job name        : alpaca_lora_chatbot
+WorkDir         : /iridisfs/home/ns1u25/alpaca_lora_lab
+Command         : /iridisfs/home/ns1u25/alpaca_lora_lab/run_chatbot_lab.slurm
+Partition       : ecsstudents_l4
+Num hosts       : 1
+Num cores       : 8
+Num of tasks    : 1
+Hosts allocated : ecsai02
+Job Output Follows ...
+===============================================================================
+================================================================
+Job ID         : 907231
+Job name       : alpaca_lora_chatbot
+Node           : ecsai02
+Partition      : ecsstudents_l4
+Started at     : Mon May  4 20:17:15 BST 2026
+Working dir    : /home/ns1u25/alpaca_lora_lab
+================================================================
+----- nvidia-smi -----
+Mon May  4 20:17:16 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 590.48.01              Driver Version: 590.48.01      CUDA Version: 13.1     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L4                      On  |   00000000:49:00.0 Off |                    0 |
+| N/A   26C    P8             16W /   72W |       0MiB /  23034MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+----------------------
+Python    : Python 3.9.25
+PyTorch   : 2.2.0+cu121
+CUDA build: 12.1
+GPU avail : True
+Device    : NVIDIA L4
+Now in: /home/ns1u25/alpaca_lora_lab/alpaca-lora
+
+================ Running generate_chatbot.py (3B) ===============
+cuda PYTORCH_CUDA_ALLOC_CONF =  garbage_collection_threshold:0.6,max_split_size_mb:256
+cuda memory (free  0 ; reserved  0 ; allocated  0 )
+device used = cuda
+Infer Alpaca-LoRA model with params:
+base_model: openlm-research/open_llama_3b_v2
+test_file: 
+
+pad token = unk token =  0
+Individual Instruction: Tell me about alpacas.
+Inferred Answer: Alpacas are a type of camelid that originated in the Andes Mountains of South America. Alpacas are very similar to llamas, but alpacas are smaller. Alpacas are very similar to llamas, but alpacas are smaller. Alpacas are very similar to llamas, but alpacas are smaller. Alpacas are very similar to llamas, but alpacas are smaller. Alpacas are very similar to llamas, but alpacas are smaller. Alpacas are very
+Individual Instruction: Tell me about the president of Mexico in 2019.
+Inferred Answer: The president of Mexico in 2019 is Andrés Manuel López Obrador. He was born in Mexico City in 1953. He is a member of the Institutional Revolutionary Party (PRI). He was elected president of Mexico in 2018. He was the mayor of Mexico City from 2000 to 2005. He was the mayor of Mexico City from 2005 to 2012. He was the mayor of Mexico City from 2012 to 2015. He was the mayor
+Individual Instruction: Tell me about the king of France in 2019.
+Inferred Answer: In 2019, the king of France is Louis XVI. Louis XVI was the king of France from 1774 to 1792. Louis XVI was born in 1754 and died in 1793. Louis XVI married Marie Antoinette in 1770. Marie Antoinette was the queen of France from 1774 to 1792. Marie Antoinette was born in 1755 and died in 1793. Louis XVI and Marie Antoinette had
+
+============ Running generate_chatbot_shapes.py (3B) ============
+cuda PYTORCH_CUDA_ALLOC_CONF =  garbage_collection_threshold:0.6,max_split_size_mb:256
+cuda memory (free  0 ; reserved  0 ; allocated  0 )
+device used = cuda
+Infer Alpaca-LoRA model with params:
+base_model: openlm-research/open_llama_3b_v2
+test_file: 
+
+pad token = unk token =  0
+
+
+model architecture:
+OptimizedModule(
+  (_orig_mod): LlamaForCausalLM(
+    (model): LlamaModel(
+      (embed_tokens): Embedding(32000, 3200, padding_idx=0)
+      (layers): ModuleList(
+        (0-25): 26 x LlamaDecoderLayer(
+          (self_attn): LlamaAttention(
+            (q_proj): Linear(in_features=3200, out_features=3200, bias=False)
+            (k_proj): Linear(in_features=3200, out_features=3200, bias=False)
+            (v_proj): Linear(in_features=3200, out_features=3200, bias=False)
+            (o_proj): Linear(in_features=3200, out_features=3200, bias=False)
+            (rotary_emb): LlamaRotaryEmbedding()
+          )
+          (mlp): LlamaMLP(
+            (gate_proj): Linear(in_features=3200, out_features=8640, bias=False)
+            (down_proj): Linear(in_features=8640, out_features=3200, bias=False)
+            (up_proj): Linear(in_features=3200, out_features=8640, bias=False)
+            (act_fn): SiLUActivation()
+          )
+          (input_layernorm): LlamaRMSNorm()
+          (post_attention_layernorm): LlamaRMSNorm()
+        )
+      )
+      (norm): LlamaRMSNorm()
+    )
+    (lm_head): Linear(in_features=3200, out_features=32000, bias=False)
+  )
+)
+
+embedding layer:
+Embedding(32000, 3200, padding_idx=0)
+
+first decoder layer:
+LlamaDecoderLayer(
+  (self_attn): LlamaAttention(
+    (q_proj): Linear(in_features=3200, out_features=3200, bias=False)
+    (k_proj): Linear(in_features=3200, out_features=3200, bias=False)
+    (v_proj): Linear(in_features=3200, out_features=3200, bias=False)
+    (o_proj): Linear(in_features=3200, out_features=3200, bias=False)
+    (rotary_emb): LlamaRotaryEmbedding()
+  )
+  (mlp): LlamaMLP(
+    (gate_proj): Linear(in_features=3200, out_features=8640, bias=False)
+    (down_proj): Linear(in_features=8640, out_features=3200, bias=False)
+    (up_proj): Linear(in_features=3200, out_features=8640, bias=False)
+    (act_fn): SiLUActivation()
+  )
+  (input_layernorm): LlamaRMSNorm()
+  (post_attention_layernorm): LlamaRMSNorm()
+)
+
+first self-attention layer:
+LlamaAttention(
+  (q_proj): Linear(in_features=3200, out_features=3200, bias=False)
+  (k_proj): Linear(in_features=3200, out_features=3200, bias=False)
+  (v_proj): Linear(in_features=3200, out_features=3200, bias=False)
+  (o_proj): Linear(in_features=3200, out_features=3200, bias=False)
+  (rotary_emb): LlamaRotaryEmbedding()
+)
+
+
+tensor input shape (embedding layer):
+torch.Size([1])
+
+tensor output shape (embedding layer):
+size =  torch.Size([1, 3200])
+embedding (static) tensor for vocab index 1 =  tensor([[ 1.0315e-02,  2.8687e-03,  5.9128e-04,  ..., -1.8845e-03,
+         -9.2983e-05, -3.0060e-03]], device='cuda:0', dtype=torch.float16,
+       grad_fn=<EmbeddingBackward0>)
+embedding (static) tensor for vocab index 2 =  tensor([[-0.0039,  0.0026,  0.0009,  ...,  0.0028, -0.0029,  0.0056]],
+       device='cuda:0', dtype=torch.float16, grad_fn=<EmbeddingBackward0>)
+
+tensor input shape (self-attention layer):
+torch.Size([1, 3200])
+
+tensor output shape (self-attention layer):
+torch.Size([1, 3200])
+
+tensor input shape (LM linear layer):
+torch.Size([1, 3200])
+
+tensor output shape (LM linear layer):
+torch.Size([1, 32000])
+
+
+Individual Instruction: Tell me about alpacas.
+Inferred Answer: Alpacas are a type of camelid that originated in the Andes Mountains of South America. Alpacas are very similar to llamas, but alpacas are smaller. Alpacas are very similar to llamas, but alpacas are smaller. Alpacas are very similar to llamas, but alpacas are smaller. Alpacas are very similar to llamas, but alpacas are smaller. Alpacas are very similar to llamas, but alpacas are smaller. Alpacas are very
+Individual Instruction: Tell me about the president of Mexico in 2019.
+Inferred Answer: The president of Mexico in 2019 is Andrés Manuel López Obrador. He was born in Mexico City in 1953. He is a member of the Institutional Revolutionary Party (PRI). He was elected president of Mexico in 2018. He was the mayor of Mexico City from 2000 to 2005. He was the mayor of Mexico City from 2005 to 2012. He was the mayor of Mexico City from 2012 to 2015. He was the mayor
+Individual Instruction: Tell me about the king of France in 2019.
+Inferred Answer: In 2019, the king of France is Louis XVI. Louis XVI was the king of France from 1774 to 1792. Louis XVI was born in 1754 and died in 1793. Louis XVI married Marie Antoinette in 1770. Marie Antoinette was the queen of France from 1774 to 1792. Marie Antoinette was born in 1755 and died in 1793. Louis XVI and Marie Antoinette had
+================================================================
+Finished at: Mon May  4 20:18:42 BST 2026
+================================================================
+==============================================================================
+Running epilogue script on ecsai02.
+
+Submit time  : 2026-05-04T20:17:14
+Start time   : 2026-05-04T20:17:15
+End time     : 2026-05-04T20:18:42
+Elapsed time : 00:01:27 (Timelimit=02:00:00)
+
+Job ID: 907231
+Cluster: iridis_x
+User/Group: ns1u25/fp
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 00:01:05
+CPU Efficiency: 9.34% of 00:11:36 core-walltime
+Job Wall-clock time: 00:01:27
+Memory Utilized: 1.99 GB
+Memory Efficiency: 6.23% of 32.00 GB (32.00 GB/node)
+
